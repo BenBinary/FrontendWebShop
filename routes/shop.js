@@ -8,6 +8,8 @@ const adminData = require('./admin');
 
 const router = express.Router();
 
+
+// Get-Aufruf des Shops
 router.get('/', (req, res, next) => {
 
   console.log(adminData.products);
@@ -19,7 +21,7 @@ router.get('/', (req, res, next) => {
     path: '/shop', 
     pageTitle: 'Shop',
     activeShop: true,
-    activeAddProduct: true 
+    activeAddProduct: false 
   });
 
 });
