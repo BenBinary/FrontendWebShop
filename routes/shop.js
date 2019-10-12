@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
     prods: products, 
     hasProducts: products.length > 0, 
     docTitle: 'ShopMop', 
-    path: '/shop', 
+    path: '/', 
     pageTitle: 'Shop',
     activeShop: true,
     activeAddProduct: false 
