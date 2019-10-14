@@ -13,7 +13,6 @@ const p = path.join(
 // Zugriff auf die JSON-Datei um die Daten zu speichern
 const getProductsFromFile = (cb) => {
 
-
     fs.readFile(p, (err, fileContent) => {
       if (err) {
          cb([]);
