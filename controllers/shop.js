@@ -43,9 +43,16 @@ exports.getCheckout = (req, res, next) => {
 // GET INDEX
 exports.getIndex = (req, res, render) => {
 
-  res.render('shop/index', {
-    pageTitle: 'Index',
-    path: '/'
-  });
+  Product.fetchAll(products => {
+    res.render('shop/index', {
+        prods: products, 
+        hasProducts: products.length > 0, 
+        docTitle: 'Index', 
+        path: '/', 
+        pageTitle: 'Index',
+        activeShop: true,
+        activeAddProduct: false 
+      });
+    });
   
 };
