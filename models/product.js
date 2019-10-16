@@ -17,7 +17,7 @@ const getProductsFromFile = (cb) => {
       if (err) {
          cb([]);
       } else {
-        //console.log(JSON.parse(fileContent));
+        
         cb(JSON.parse(fileContent));
       }
   });  
@@ -34,7 +34,7 @@ module.exports = class Product {
 
     save() {
         
-
+        this.id = Math.random().toString();
         // products ist wieder Callback und (Callback-)Funktion wird ausgeführt nachdem die eigentliche Methode ausgeführt wurde
         getProductsFromFile(products => {
 
@@ -53,5 +53,13 @@ module.exports = class Product {
         // cb für Callback 
         getProductsFromFile(cb);
 
+    }
+
+    static findById(id, cb) {
+        getProductsFromFile(products => {
+            const product = products.find(p => p.id === id);
+            cb(product);
+            
+        });
     }
 }

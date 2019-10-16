@@ -15,7 +15,27 @@ exports.getProducts = (req, res, next) => {
             activeAddProduct: false 
           });
         });
-  };
+};
+
+exports.getProduct = (req, res, next) => {
+
+  const prodId = req.params.productID;
+
+  Product.findById(prodId, product => {
+    res.render('shop/product-detail', {
+      
+      path: '/products',
+      pageTitle: `Product Detail von ${product.title}`,
+      product: product
+
+    });
+
+
+  });
+
+ 
+
+};
 
 
 // Get Card
@@ -28,7 +48,24 @@ exports.getCard = (req, res, next) => {
 
 };
 
+// Post Card
+exports.postCard = (req, res, next) => {
 
+  const id = req.body.productID;
+  console.log(id);
+  res.redirect('/cart');
+  
+};
+
+// Get Orders
+exports.getOrders = (req, res, next) => {
+
+  res.render('shop/orders', {
+      pageTitle: 'Your Orders',
+      path: '/orders'
+  });
+
+};
 
 // Get Checkout
 exports.getCheckout = (req, res, next) => {
