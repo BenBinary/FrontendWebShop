@@ -1,6 +1,7 @@
 
 
 const Product = require('../models/product');
+const Cart = require('../models/cart');
 
 exports.getProducts = (req, res, next) => {
 
@@ -52,7 +53,15 @@ exports.getCard = (req, res, next) => {
 exports.postCard = (req, res, next) => {
 
   const id = req.body.productID;
-  console.log(id);
+
+  // HOlen des Produkts aus der Produkt DB
+  Product.findById(id, (product) => {
+
+    // product wurde über Callback übergeben --> Jetzt hinzufügen zu Karte
+    Cart.addProduct(id, product.price);
+
+
+  });
   res.redirect('/cart');
   
 };
