@@ -6,17 +6,19 @@ const p = path.join(
     path.dirname(process.mainModule.filename), 
     'data',
     'cart.json'
- );
-
+);
 
 module.exports = class Cart {
 
     static addProduct(id, productPrice) {
 
+        // Datenmodell für die persistente Speicherung der Daten
         let cart = { products: [], totalPrice: 0 };
 
         // Fetch the previous card
         fs.readFile(p, (err, fileContent) => {
+
+            console.log(`IN Cart.js File Content ${fileContent}`);
 
             // Falls kein Error beim Einlesen vorliegt
             if (!err) {
@@ -25,13 +27,17 @@ module.exports = class Cart {
                 cart = JSON.parse(fileContent);
 
             } 
-        });
+     
+
 
         // Analyze the card => Find existing products
-        const existingProductIndex = cart.products.findIndex(prod => prod.id === id);
+        const existingProductIndex = cart.products.findIndex(prod => +prod.id == id);
         const existingProduct = cart.products[existingProductIndex];
 
         let updatedProduct;
+
+        console.log(`IN Cart.js Existing Product Index ${existingProductIndex}`);
+        console.log(`IN Cart.js Existing Product ${existingProduct}`);
         
         // Add new product / increase quantity
         if (existingProduct) {
@@ -57,7 +63,7 @@ module.exports = class Cart {
             console.log(err);
         });
         
-
+    });
     }
 
 

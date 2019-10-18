@@ -30,12 +30,7 @@ exports.getProduct = (req, res, next) => {
       product: product
 
     });
-
-
   });
-
- 
-
 };
 
 
@@ -60,6 +55,8 @@ exports.postCard = (req, res, next) => {
     // product wurde über Callback übergeben --> Jetzt hinzufügen zu Karte
     Cart.addProduct(id, product.price);
 
+    //console.log(`IN SHOP Contorller ID ${id}`);
+    //console.log(`IN SHOP Contorller Preis ${product.price}`);
 
   });
   res.redirect('/cart');
