@@ -70,12 +70,32 @@ module.exports = class Product {
         });
     }
 
+    static deleteById(id) {
+
+        getProductsFromFile(products => {
+
+            // Excluding einer bestimmter IDs
+            const updatedProducts = products.filter(prod => prod.id !== id);
+
+            // Das aktualisierte Array wird gespeichert
+            fs.writeFile(p, JSON.stringify(updatedProducts), err => {
+                if (!err) {
+                    
+                }
+            });           
+            
+            
+        });
+
+    }
+
     static fetchAll(cb) {
 
         // cb für Callback 
         getProductsFromFile(cb);
 
     }
+
 
     static findById(id, cb) {
         getProductsFromFile(products => {
