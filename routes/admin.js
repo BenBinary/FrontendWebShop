@@ -17,4 +17,9 @@ router.post('/add-product', adminController.postAddProduct);
 
 router.get('/edit-product/:productId', adminController.getEditProduct);
 
+//Route um Artikel zu aktualisieren
+router.post('/edit-product', adminController.postEditProduct);
+
+//Um einen Artikel zu löschen
+
 module.exports = router;

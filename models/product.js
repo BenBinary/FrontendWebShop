@@ -25,7 +25,8 @@ const getProductsFromFile = (cb) => {
 
 module.exports = class Product {
 
-    constructor(title, imageURL, description, price) {
+    constructor(id, title, imageURL, description, price) {
+        this.id = id;
         this.title = title;
         this.imageURL = imageURL;
         this.description = description;
@@ -34,17 +35,38 @@ module.exports = class Product {
 
     save() {
         
-        this.id = Math.random().toString();
+        
         // products ist wieder Callback und (Callback-)Funktion wird ausgeführt nachdem die eigentliche Methode ausgeführt wurde
         getProductsFromFile(products => {
 
-                // aktuelles Objekt wird dem Array hinzugefügt
-                products.push(this);
+                // Ob die ID bereits exisitert
+                if (this.id) {
 
-                // das aktuelle Objekt wird überschrieben
-                fs.writeFile(p, JSON.stringify(products), (err) => {
-                console.log(err);
-            });
+                    const existingProductIndex = products.findIndex(prod => prod.id === this.id);
+                    const updatedProducts = [...products];
+                    updatedProducts[existingProductIndex] = this;       // Überschreiben bestehender Index
+                    fs.writeFile(p, JSON.stringify(updatedProducts), (err) => {
+                        console.log(err);
+                    });
+ 
+                } else {
+
+                    var intID = 0;
+                    // Eine neue ID wird generiert
+                    intID = Math.random() * 10000;
+                    intID = parseInt(intID);
+                    this.id = intID;
+
+                    // aktuelles Objekt wird dem Array hinzugefügt
+                    products.push(this);
+
+                    // das aktuelle Objekt wird überschrieben
+                    fs.writeFile(p, JSON.stringify(products), (err) => {
+                        console.log(err);
+                    });
+
+                }
+
         });
     }
 
