@@ -1,7 +1,7 @@
 <%- include('../includes/head.ejs')  %>
     
-<link rel="stylesheet" href="/css/form.css">
-<link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" type="text/css" href="/css/forms.css">
+<link rel="stylesheet" type="text/css" href="/css/product.css">
 </head>
 
 <body>
@@ -16,15 +16,15 @@
         </div>
         <div class="form-control">
             <label for="imageUrl">Image URL</label>
-            <input type="text" name="imageUrl" id="imageUrl" value="<% if (editing) { %> <%= product.imageUrl %> <% } else { %> nichts <% } %>">
+            <input type="text" name="imageUrl" id="imageUrl" value="<% if (editing) { %> <%= product.imageURL %> <% } %>">
         </div>
         <div class="form-control">
             <label for="price">Price</label>
-            <input type="number" name="price" id="price" step="0.01" value="<% if (editing) { %> <%= product.price %> <% } %>">
+            <input type="number" name="price" id="price" step="0.01" value="<% if (editing) { %>  <%= parseInt(product.price) %> <% } %>">
         </div>
         <div class="form-control">
             <label for="description">Description</label>
-            <textarea name="description" id="description" rows="5" value="<% if (editing) { %> <%= product.description %> <% } %>"></textarea>
+            <textarea name="description" id="description" rows="5"><% if (editing) { %> <%= product.description %> <% } %></textarea>
         </div>
 
         <button class="btn" type="submit"><% if (editing) { %> Update Product <% } else { %>Add Product<% } %></button>
