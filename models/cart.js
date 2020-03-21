@@ -107,7 +107,7 @@ module.exports = class Cart {
     }
 
     // Alle Proudkte 
-    static getProducts(cb) {
+    static getCard(cb) {
 
          // Fetch the previous card
          fs.readFile(p, (err, fileContent) => {
