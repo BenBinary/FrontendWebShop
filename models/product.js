@@ -2,12 +2,18 @@ const fs = require('fs');
 const products = [];
 const path = require('path');
 
+const Cart = require("./cart");
+
+
 // P Variable ist der aktuelle Pfad gespeichert
 const p = path.join(
     path.dirname(process.mainModule.filename), 
     'data',
     'products.json'
   );
+
+
+
 
 
 // Zugriff auf die JSON-Datei um die Daten zu speichern
@@ -74,12 +80,18 @@ module.exports = class Product {
 
         getProductsFromFile(products => {
 
+            const product = products.find(prod => prod.id === id);
+
             // Excluding einer bestimmter IDs
             const updatedProducts = products.filter(prod => prod.id !== id);
 
             // Das aktualisierte Array wird gespeichert
             fs.writeFile(p, JSON.stringify(updatedProducts), err => {
                 if (!err) {
+                    // if Product wont stay in the card anymore 
+
+                    Cart.deleteProduct(id, product.price);
+
                     
                 }
             });           

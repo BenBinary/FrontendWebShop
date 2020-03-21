@@ -66,5 +66,42 @@ module.exports = class Cart {
     });
     }
 
+    static deleteProduct(id, productPrice) {
+
+        // Fetch the previous card
+        fs.readFile(p, (err, fileContent) => {
+
+            if (err) {
+                
+                // Falls ein Error aufkommt
+                return;
+            }
+
+            // Mit Next Gen JS
+            const updatedProduct = { ...cart };
+
+            // Das jeweilige Produt herausfinden, das gelöscht werden soll
+            const product = updatedProduct.products.find(prod => prod.id === id);
+
+            // Die entsprechende Anzahl ermitteln
+            const productQty = product.qty;
+
+
+            // Herausfiltern
+            updatedCart.products = updatedProduct.products.filter(prod => prod.id !== id);
+
+
+            // Reduzieren des gesamten Preises
+            updatedCart.totalPrice = updatedCart.totalPrice - productPrice * productQty;
+
+            // Wagen wird unter p als JSON-String abgespeichert. Errors werden geloggt
+            fs.writeFile(p, JSON.stringify(updatedProduct), (err) => {
+                console.log(err);
+            });
+
+        });
+
+    }
+
 
 }
