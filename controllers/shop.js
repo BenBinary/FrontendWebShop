@@ -42,17 +42,32 @@ exports.getCard = (req, res, next) => {
       // Auch alle Produkte laden
       Product.fetchAll(products => {
 
+        // Store the Products --> containers the products
+        const cartProducts = [];
 
+          // Herausfiltern der Proudukte die auch wirklich für die Karte gewählt wurden
+          for (product of products) {
+
+            const cartProductData = cart.products.find(prod => prod.id === product.id);
+
+            if (cartProductData) {
+
+              cartProducts.push({productData: product, qty: cartProductData.qty});
+
+            }
+          }
+ 
+          res.render('shop/cart', {
+            pageTitle: 'Cart',
+            path: '/cart',
+            products: cartProducts
+        });
 
 
       });
 
   });
 
-  res.render('shop/cart', {
-      pageTitle: 'Cart',
-      path: '/cart'
-  });
 
 };
 
