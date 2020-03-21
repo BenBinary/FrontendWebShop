@@ -80,25 +80,29 @@ module.exports = class Cart {
                 return;
             }
 
-            // Mit Next Gen JS
-            const updatedProduct = { ...JSON.parse(fileContent) };
+            // Mit Next Gen JS, Thread Operator
+            const updatedCart = { ...JSON.parse(fileContent) };
 
             // Das jeweilige Produt herausfinden, das gelöscht werden soll
-            const product = updatedProduct.products.find(prod => prod.id === id);
+            const product = updatedCart.products.find(prod => prod.id === id);
+
+            if (!product) {
+                return;
+            }
 
             // Die entsprechende Anzahl ermitteln
             const productQty = product.qty;
 
 
             // Herausfiltern
-            updatedCart.products = updatedProduct.products.filter(prod => prod.id !== id);
+            updatedCart.products = updatedCart.products.filter(prod => prod.id !== id);
 
 
             // Reduzieren des gesamten Preises
             updatedCart.totalPrice = updatedCart.totalPrice - productPrice * productQty;
 
             // Wagen wird unter p als JSON-String abgespeichert. Errors werden geloggt
-            fs.writeFile(p, JSON.stringify(updatedProduct), (err) => {
+            fs.writeFile(p, JSON.stringify(updatedCart), (err) => {
                 console.log(err);
             });
 
