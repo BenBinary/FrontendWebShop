@@ -66,6 +66,9 @@ module.exports = class Cart {
     });
     }
 
+
+
+    // Ein Produkt löschen
     static deleteProduct(id, productPrice) {
 
         // Fetch the previous card
@@ -78,7 +81,7 @@ module.exports = class Cart {
             }
 
             // Mit Next Gen JS
-            const updatedProduct = { ...cart };
+            const updatedProduct = { ...JSON.parse(fileContent) };
 
             // Das jeweilige Produt herausfinden, das gelöscht werden soll
             const product = updatedProduct.products.find(prod => prod.id === id);
@@ -102,6 +105,26 @@ module.exports = class Cart {
         });
 
     }
+
+    // Alle Proudkte 
+    static getProducts(cb) {
+
+         // Fetch the previous card
+         fs.readFile(p, (err, fileContent) => {
+
+            const cart = JSON.parse(fileContent);
+
+            if (err) {
+                
+                // Falls ein Error aufkommt
+                cb(null);
+            } else {
+                cb(cart);
+            }
+
+    
+        });
+    }   
 
 
 }

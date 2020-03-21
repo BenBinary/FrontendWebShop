@@ -37,6 +37,18 @@ exports.getProduct = (req, res, next) => {
 // Get Card
 exports.getCard = (req, res, next) => {
 
+  Cart.getCard(cart => {
+
+      // Auch alle Produkte laden
+      Product.fetchAll(products => {
+
+
+
+
+      });
+
+  });
+
   res.render('shop/cart', {
       pageTitle: 'Cart',
       path: '/cart'
